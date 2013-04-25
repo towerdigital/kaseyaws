@@ -22,7 +22,7 @@ Create a new web service client
 
 kclient = KaseyaWS::Client.new("username","password","mykserver.domain.com")
 
-Get all a list of all of the alarms
+Get all a list of all of Kaseya alarms
 
 alarms = kclient.get_all_alarms("true")
 
