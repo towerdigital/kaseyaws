@@ -21,9 +21,11 @@ Or install it yourself as:
 Example Usage:
 
 Create a new web service client
+
 kclient = KaseyaWS::Client("username","password","mykserver.domain.com")
 
-Get all a list of all of the alarms 
+Get all a list of all of the alarms
+
 alarms = kclient.get_all_alarms("true")
 
 ## Contributing
