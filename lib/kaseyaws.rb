@@ -5,7 +5,7 @@ require "savon"
 module KaseyaWS
 
   class Client
-    HASH_ALGORITHM = "SHA-1"
+    HASH_ALGORITHM = "SHA-256"
 
     def initialize (username,password,hostname)
 
@@ -18,7 +18,8 @@ module KaseyaWS
         wsdl: @serviceurl,
         convert_request_keys_to: :camelcase,
         env_namespace: :soap,
-        open_timeout: 30
+        open_timeout: 30,
+        log: true
       }
       # Autheticate with web service and get session id
       @sessionid = self.authenticate(username,password)
@@ -44,6 +45,18 @@ module KaseyaWS
 
     end
 
+    def get_alarm (monitor_alarm_id)
+
+      client = Savon.client(@savon_options)
+
+      response = client.call(:get_alarm, message: {req:[{
+                                                          monitor_alarm_i_d: monitor_alarm_id,
+                                                          browser_ip: @client_ip,
+                             session_i_d: @sessionid}]}
+                             )
+      response.hash[:envelope][:body][:get_alarm_response][:get_alarm_result]
+    end
+
     def get_alarm_list (get_all_records)
 
       client = Savon.client(@savon_options)
@@ -54,6 +67,42 @@ module KaseyaWS
                              session_i_d: @sessionid}]}
                              )
       response.hash[:envelope][:body][:get_alarm_list_response][:get_alarm_list_result]
+    end
+
+    def get_machine(machine_group_id)
+
+      client = Savon.client(@savon_options)
+
+      response = client.call(:get_machine, message: {req:[{
+                                                            machine___group_i_d: machine_group_id,
+                                                            browser_ip: @client_ip,
+                             session_i_d: @sessionid}]}
+                             )
+      response.hash[:envelope][:body][:get_machine_response][:get_machine_result]
+    end
+
+    def get_machine_group_list
+
+      client = Savon.client(@savon_options)
+
+      response = client.call(:get_machine_group_list, message: {req:[{
+                                                                       browser_ip: @client_ip,
+                             session_i_d: @sessionid}]}
+                             )
+      response.hash[:envelope][:body][:get_machine_group_list_response][:get_machine_group_list_result]
+    end
+
+    def get_machine_list(machine_group,machine_collection)
+
+      client = Savon.client(@savon_options)
+
+      response = client.call(:get_machine_list, message: {req:[{
+                                                                 machine_group: machine_group,
+                                                                 machine_collection: machine_collection,
+                                                                 browser_ip: @client_ip,
+                             session_i_d: @sessionid}]}
+                             )
+      response.hash[:envelope][:body][:get_machine_list_response][:get_machine_list_result]
     end
 
   end
