@@ -1,6 +1,6 @@
-# Kaseyaws
+# KaseyaWS
 
-TODO: Write a gem description
+A simple Ruby client for Kaseya VSA web service.
 
 ## Installation
 
@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Example Usage:
+
+# Create a new web service client
+kclient = KaseyaWS::Client("username","password","mykserver.domain.com")
+
+# Get all a list of all of the alarms 
+alarms = kclient.get_all_alarms("true")
 
 ## Contributing
 
