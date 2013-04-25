@@ -9,21 +9,34 @@ module KaseyaWS
 
     def initialize (username,password,hostname)
 
-      # The FQDN of the Kaseya web service
-      @serviceurl = "https://" + hostname + "/vsaWS/kaseyaWS.asmx?WSDL"
+      # The FQDN of the Kaseya web services
+      @vsa_serviceurl = "https://" + hostname + "/vsaWS/kaseyaWS.asmx?WSDL"
       # Get the clients IP address
       @client_ip = KaseyaWS::Security.client_ip
       # Hash savon option for reuse
       @savon_options={
-        wsdl: @serviceurl,
+        wsdl: @vsa_serviceurl,
         convert_request_keys_to: :camelcase,
         env_namespace: :soap,
         open_timeout: 30,
-        log: true
+        log: false
       }
       # Autheticate with web service and get session id
       @sessionid = self.authenticate(username,password)
 
+    end
+
+    def add_mach_group_to_scope(group_name,scope_name)
+
+      client = Savon.client(@savon_options)
+
+      response = client.call(:add_mach_group_to_scope, message: {req:[{
+                                                                 group_name: group_name,
+                                                                 scope_name: scope_name,
+                                                                 browser_ip: @client_ip,
+                             session_i_d: @sessionid}]}
+                             )
+      response.body[:get_machine_list_response][:get_machine_list_result]
     end
 
     def authenticate(username,password)

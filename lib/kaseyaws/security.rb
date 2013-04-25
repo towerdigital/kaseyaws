@@ -1,7 +1,7 @@
-require 'Digest'
+require 'digest'
 require 'net/http'
-require 'SecureRandom'
-require 'JSON'
+require 'securerandom'
+require 'json'
 
 module KaseyaWS
   class Security

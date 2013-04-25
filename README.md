@@ -20,7 +20,7 @@ Or install it yourself as:
 
 Create a new web service client
 
-kclient = KaseyaWS::Client("username","password","mykserver.domain.com")
+kclient = KaseyaWS::Client.new("username","password","mykserver.domain.com")
 
 Get all a list of all of the alarms
 
