@@ -18,8 +18,6 @@ Or install it yourself as:
 
 ## Usage
 
-Example Usage:
-
 Create a new web service client
 
 kclient = KaseyaWS::Client("username","password","mykserver.domain.com")
