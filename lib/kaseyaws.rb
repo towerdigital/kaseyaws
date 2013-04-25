@@ -54,7 +54,7 @@ module KaseyaWS
                                                           browser_ip: @client_ip,
                              session_i_d: @sessionid}]}
                              )
-      response.hash[:envelope][:body][:get_alarm_response][:get_alarm_result]
+      response.body[:get_alarm_response][:get_alarm_result]
     end
 
     def get_alarm_list (get_all_records)
@@ -66,7 +66,7 @@ module KaseyaWS
                                                                browser_ip: @client_ip,
                              session_i_d: @sessionid}]}
                              )
-      response.hash[:envelope][:body][:get_alarm_list_response][:get_alarm_list_result]
+      response.body[:get_alarm_list_response][:get_alarm_list_result]
     end
 
     def get_machine(machine_group_id)
@@ -78,7 +78,7 @@ module KaseyaWS
                                                             browser_ip: @client_ip,
                              session_i_d: @sessionid}]}
                              )
-      response.hash[:envelope][:body][:get_machine_response][:get_machine_result]
+      response.body[:get_machine_response][:get_machine_result]
     end
 
     def get_machine_group_list
@@ -89,7 +89,7 @@ module KaseyaWS
                                                                        browser_ip: @client_ip,
                              session_i_d: @sessionid}]}
                              )
-      response.hash[:envelope][:body][:get_machine_group_list_response][:get_machine_group_list_result]
+      response.body[:get_machine_group_list_response][:get_machine_group_list_result]
     end
 
     def get_machine_list(machine_group,machine_collection)
@@ -102,7 +102,7 @@ module KaseyaWS
                                                                  browser_ip: @client_ip,
                              session_i_d: @sessionid}]}
                              )
-      response.hash[:envelope][:body][:get_machine_list_response][:get_machine_list_result]
+      response.body[:get_machine_list_response][:get_machine_list_result]
     end
 
   end
