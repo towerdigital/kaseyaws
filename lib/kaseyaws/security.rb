@@ -12,7 +12,7 @@ module KaseyaWS
       return r['ip']
     end
 
-    def self.secure_random(length)
+    def self.secure_random
       i = SecureRandom.random_bytes
       i = i.each_byte.map { |b| b.to_s }.join
       i = i.gsub("0","")

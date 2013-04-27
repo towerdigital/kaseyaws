@@ -9,11 +9,8 @@ module KaseyaWS
 
     def initialize (username,password,hostname)
 
-      # The FQDN of the Kaseya web services
       @vsa_serviceurl = "https://" + hostname + "/vsaWS/kaseyaWS.asmx?WSDL"
-      # Get the clients IP address
       @client_ip = KaseyaWS::Security.client_ip
-      # Hash savon option for reuse
       @savon_options={
         wsdl: @vsa_serviceurl,
         convert_request_keys_to: :camelcase,
@@ -21,7 +18,6 @@ module KaseyaWS
         open_timeout: 30,
         log: false
       }
-      # Autheticate with web service and get session id
       @sessionid = self.authenticate(username,password)
 
     end
@@ -31,9 +27,9 @@ module KaseyaWS
       client = Savon.client(@savon_options)
 
       response = client.call(:add_mach_group_to_scope, message: {req:[{
-                                                                 group_name: group_name,
-                                                                 scope_name: scope_name,
-                                                                 browser_ip: @client_ip,
+                                                                        group_name: group_name,
+                                                                        scope_name: scope_name,
+                                                                        browser_ip: @client_ip,
                              session_i_d: @sessionid}]}
                              )
       response.body[:get_machine_list_response][:get_machine_list_result]
@@ -41,7 +37,7 @@ module KaseyaWS
 
     def authenticate(username,password)
 
-      random_number = KaseyaWS::Security.secure_random(8)
+      random_number = KaseyaWS::Security.secure_random
       covered_password = KaseyaWS::Security.compute_covered_password(username,password, random_number, HASH_ALGORITHM)
       browser_ip = @client_ip
 
@@ -70,7 +66,7 @@ module KaseyaWS
       response.body[:get_alarm_response][:get_alarm_result]
     end
 
-    def get_alarm_list (get_all_records)
+    def get_alarm_list (get_all_records=true)
 
       client = Savon.client(@savon_options)
 
