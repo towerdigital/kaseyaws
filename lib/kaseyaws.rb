@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright 2013 by Phillip Henslee (phenslee@towerdigtial.us).
+# Copyright 2013 by Phillip Henslee (phenslee@towerdigital.us).
 # All rights reserved.
 
 # Permission is granted for use, copying, modification, distribution,
