@@ -1,0 +1,4 @@
+--readme README.md
+--title 'kaseyaws documentation'
+--charset utf-8
+'lib/**/*.rb'
