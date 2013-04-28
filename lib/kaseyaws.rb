@@ -1,4 +1,4 @@
-require "kaseyaws/version"
+:wrequire "kaseyaws/version"
 require "kaseyaws/security"
 require "savon"
 
