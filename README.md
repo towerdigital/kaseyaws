@@ -1,6 +1,6 @@
 # KaseyaWS
 
-A simple Ruby client for Kaseya VSA web service.
+A simple Ruby client for Kaseya's VSA web service.
 
 ## Installation
 
@@ -22,14 +22,6 @@ Create a new web service client
 
 kclient = KaseyaWS::Client.new("username","password","mykserver.domain.com")
 
-Get all a list of all of Kaseya alarms
+Get all alarms, returns hash table
 
-alarms = kclient.get_all_alarms("true")
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+alarms = kclient.get_all_alarms
