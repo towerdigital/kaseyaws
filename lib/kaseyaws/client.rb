@@ -93,16 +93,16 @@ module KaseyaWS
       response.body[:close_alarm_response][:close_alarm_result]
     end
 
-    def create_role (role_name,role_type,parent_role_name)
+    def create_machine_group (group_name,org_name,parent_name)
 
-      response = self.client.call(:create_role, message: {req:[{
-                                                            role_name: role_name,
-                                                            role_type: role_type,
-                                                            parent_role_name: parent_role_name,
+      response = self.client.call(:create_machine_group, message: {req:[{
+                                                            group_name: group_name,
+                                                            org_name: org_name,
+                                                            parent_name: parent_name,
                                                             browser_ip: @client_ip,
                              session_i_d: @sessionid}]}
                              )
-      response.body[:create_role_response][:create_role_result]
+      response.body[:create_machine_group_response][:create_machine_group_result]
     end
 
     def create_role (role_name,role_type,parent_role_name)
