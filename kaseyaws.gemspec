@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email         = ["phenslee@towerdigital.us"]
   s.description   = ["A Ruby client for Kaseya web services"]
   s.summary       = ["A simple client for the Kaseya VSA web service"]
-  s.homepage      = ""
+  s.homepage      = "https://github.com/towerdigital/kaseyaws"
   s.license       = "MIT"
 
   s.files         = `git ls-files`.split($/)
@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^(test|s|features)/})
   s.require_paths = ["lib"]
   s.add_dependency("savon", [">= 2.1.0"])
+  s.add_dependency("json")
 
   s.add_development_dependency "bundler", "~> 1.3"
   s.add_development_dependency "rake"
