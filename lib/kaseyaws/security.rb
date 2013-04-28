@@ -1,3 +1,15 @@
+#!/usr/bin/env ruby
+#
+# Copyright 2013 by Phillip Henslee (ph2@ph2.us).
+# All rights reserved.
+
+# Permission is granted for use, copying, modification, distribution,
+# and distribution of modified versions of this work as long as the
+# above copyright notice is included.
+#
+
+# Provides some helper methods for web service authentication
+
 require 'digest'
 require 'net/http'
 require 'securerandom'
@@ -8,8 +20,7 @@ module KaseyaWS
 
     def self.client_ip
       r =  Net::HTTP.get( 'jsonip.com','/' )
-      r = JSON::parse(r)
-      return r['ip']
+      r = JSON::parse(r)['ip']
     end
 
     def self.secure_random
@@ -17,7 +28,6 @@ module KaseyaWS
       i = i.each_byte.map { |b| b.to_s }.join
       i = i.gsub("0","")
       i = i[1..8]
-      return i
     end
 
     def self.compute_covered_password(username, password, rnd_number, hashing_algorithm)
