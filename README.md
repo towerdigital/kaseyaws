@@ -18,10 +18,19 @@ Or install it yourself as:
 
 ## Usage
 
-Create a new web service client
+Create a new web service client instance
 
-kclient = KaseyaWS::Client.new("username","password","mykserver.domain.com")
+>> kclient = KaseyaWS::Client.new("username","password","mykserver.domain.com")
 
-Get all alarms, returns hash table
+Get all alarms, returns hash
 
-alarms = kclient.get_all_alarms
+>> alarms = kclient.get_alarm_list
+
+Get a specific alarm by alarm id, returns hash
+
+>> alarm = kclient.get_alarm(alarms[:alarms][:alarm][0][:monitor_alarm_id])
+
+alarm[:alarm_subject]
+
+=> => "Monitoring generated Counter ALARM at 5:47:54 am 01-Feb-13 on computer.systems.company"
+
