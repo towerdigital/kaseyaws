@@ -34,6 +34,7 @@ module KaseyaWS
 
     end
 
+    # TODO To be added...
     # def add_org(org_ref, org_name, default_dept_name, default_mg_name, website, no_emps, ann_revenue,
     #             method_of_contact, org_parent_ref, addr1, city, state, postal_code, country_ref, org_type
     #             primary_email, primary_phone, primary_fax, primary_staff_fk, browser_ip, sesion_id)
@@ -49,6 +50,7 @@ module KaseyaWS
     #   response.body[:get_machine_list_response][:get_machine_list_result]
     # end
 
+
     def add_mach_group_to_scope(group_name,scope_name)
 
       client = Savon.client(@savon_options)
@@ -59,7 +61,31 @@ module KaseyaWS
                                                                         browser_ip: @client_ip,
                              session_i_d: @sessionid}]}
                              )
-      response.body[:get_machine_list_response][:get_machine_list_result]
+      response.body[:add_mach_group_to_scope_response][:add_mach_group_to_scope_result]
+    end
+
+    def add_org_to_scope(company_id,scope_id)
+
+      client = Savon.client(@savon_options)
+
+      response = client.call(:add_org_to_scope, message: {req:[{
+                                                                 company_i_d: company_id,
+                                                                 scope_i_d: scope_id,
+                             session_i_d: @sessionid}]}
+                             )
+      response.body[:add_org_to_scope_response][:add_org_to_scope_result]
+    end
+
+    def add_user_to_role(username,role_id)
+
+      client = Savon.client(@savon_options)
+
+      response = client.call(:add_user_to_role, message: {req:[{
+                                                                 user_name: user_name,
+                                                                 role_i_d: role_id,
+                             session_i_d: @sessionid}]}
+                             )
+      response.body[:add_user_to_role_response][:add_user_to_role_result]
     end
 
     def authenticate(username,password)
