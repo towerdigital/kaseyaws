@@ -13,5 +13,3 @@
 require "kaseyaws/version"
 require "kaseyaws/security"
 require "kaseyaws/client"
-
-
