@@ -6,8 +6,8 @@ require 'kaseyaws/version'
 Gem::Specification.new do |s|
   s.name          = "kaseyaws"
   s.version       = KaseyaWS::VERSION
-  s.authors       = "Phillip Henslee"]
-  s.email         = "phenslee@towerdigital.us"]
+  s.authors       = "Phillip Henslee"
+  s.email         = "phenslee@towerdigital.us"
   s.description   = "A Ruby Gem for Kaseya's VSA web services"
   s.summary       = "A simple client for the Kaseya VSA web service"
   s.homepage      = "https://github.com/towerdigital/kaseyaws"
