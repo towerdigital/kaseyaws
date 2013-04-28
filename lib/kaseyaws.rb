@@ -18,6 +18,7 @@ module KaseyaWS
 
   class Client
     HASH_ALGORITHM = "SHA-256"
+    attr_accessor :client
 
     def initialize (username,password,hostname)
 
@@ -28,7 +29,7 @@ module KaseyaWS
         convert_request_keys_to: :camelcase,
         env_namespace: :soap,
         open_timeout: 30,
-        log: true
+        log: false
       }
       @sessionid = self.authenticate(username,password)
 
@@ -53,9 +54,7 @@ module KaseyaWS
 
     def add_mach_group_to_scope(group_name,scope_name)
 
-      client = Savon.client(@savon_options)
-
-      response = client.call(:add_mach_group_to_scope, message: {req:[{
+      response = self.client.call(:add_mach_group_to_scope, message: {req:[{
                                                                         group_name: group_name,
                                                                         scope_name: scope_name,
                                                                         browser_ip: @client_ip,
@@ -66,9 +65,7 @@ module KaseyaWS
 
     def add_org_to_scope(company_id,scope_id)
 
-      client = Savon.client(@savon_options)
-
-      response = client.call(:add_org_to_scope, message: {req:[{
+      response = self.client.call(:add_org_to_scope, message: {req:[{
                                                                  company_i_d: company_id,
                                                                  scope_i_d: scope_id,
                              session_i_d: @sessionid}]}
@@ -78,9 +75,7 @@ module KaseyaWS
 
     def add_user_to_role(username,role_id)
 
-      client = Savon.client(@savon_options)
-
-      response = client.call(:add_user_to_role, message: {req:[{
+      response = self.client.call(:add_user_to_role, message: {req:[{
                                                                  user_name: user_name,
                                                                  role_i_d: role_id,
                              session_i_d: @sessionid}]}
@@ -94,23 +89,21 @@ module KaseyaWS
       covered_password = KaseyaWS::Security.compute_covered_password(username,password, random_number, HASH_ALGORITHM)
       browser_ip = @client_ip
 
-      client = Savon.client(@savon_options)
+      self.client = Savon::Client.new(@savon_options)
 
-      response = client.call(:authenticate, message: {req:[{
-                                                             user_name: username,
-                                                             covered_password: covered_password,
-                                                             random_number: random_number,
-                                                             browser_ip: browser_ip,
-                             hashing_algorithm: HASH_ALGORITHM}]}
-                             )
+      response = self.client.call(:authenticate, message: {req:[{
+                                                                  user_name: username,
+                                                                  covered_password: covered_password,
+                                                                  random_number: random_number,
+                                                                  browser_ip: browser_ip,
+                                  hashing_algorithm: HASH_ALGORITHM}]}
+                                  )
       @sessionid = response.body[:authenticate_response][:authenticate_result][:session_id]
     end
 
     def close_alarm (monitor_alarm_id, notes)
 
-      client = Savon.client(@savon_options)
-
-      response = client.call(:close_alarm, message: {req:[{
+      response = self.client.call(:close_alarm, message: {req:[{
                                                             monitor_alarm_i_d: monitor_alarm_id,
                                                             notes: notes,
                                                             browser_ip: @client_ip,
@@ -121,9 +114,7 @@ module KaseyaWS
 
     def create_role (role_name,role_type,parent_role_name)
 
-      client = Savon.client(@savon_options)
-
-      response = client.call(:create_role, message: {req:[{
+      response = self.client.call(:create_role, message: {req:[{
                                                             role_name: role_name,
                                                             role_type: role_type,
                                                             parent_role_name: parent_role_name,
@@ -135,33 +126,27 @@ module KaseyaWS
 
     def get_alarm (monitor_alarm_id)
 
-      client = Savon.client(@savon_options)
-
-      response = client.call(:get_alarm, message: {req:[{
-                                                          monitor_alarm_i_d: monitor_alarm_id,
-                                                          browser_ip: @client_ip,
-                             session_i_d: @sessionid}]}
-                             )
+      response = self.client.call(:get_alarm, message: {req:[{
+                                                               monitor_alarm_i_d: monitor_alarm_id,
+                                                               browser_ip: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:get_alarm_response][:get_alarm_result]
     end
 
     def get_alarm_list (get_all_records=true)
 
-      client = Savon.client(@savon_options)
-
-      response = client.call(:get_alarm_list, message: {req:[{
-                                                               return_all_records: get_all_records,
-                                                               browser_ip: @client_ip,
-                             session_i_d: @sessionid}]}
-                             )
+      response = self.client.call(:get_alarm_list, message: {req:[{
+                                                                    return_all_records: get_all_records,
+                                                                    browser_ip: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:get_alarm_list_response][:get_alarm_list_result]
     end
 
     def get_machine(machine_group_id)
 
-      client = Savon.client(@savon_options)
-
-      response = client.call(:get_machine, message: {req:[{
+      response = self.client.call(:get_machine, message: {req:[{
                                                             machine___group_i_d: machine_group_id,
                                                             browser_ip: @client_ip,
                              session_i_d: @sessionid}]}
@@ -171,9 +156,7 @@ module KaseyaWS
 
     def get_machine_group_list
 
-      client = Savon.client(@savon_options)
-
-      response = client.call(:get_machine_group_list, message: {req:[{
+      response = self.client.call(:get_machine_group_list, message: {req:[{
                                                                        browser_ip: @client_ip,
                              session_i_d: @sessionid}]}
                              )
@@ -182,9 +165,7 @@ module KaseyaWS
 
     def get_machine_list(machine_group,machine_collection)
 
-      client = Savon.client(@savon_options)
-
-      response = client.call(:get_machine_list, message: {req:[{
+      response = self.client.call(:get_machine_list, message: {req:[{
                                                                  machine_group: machine_group,
                                                                  machine_collection: machine_collection,
                                                                  browser_ip: @client_ip,
