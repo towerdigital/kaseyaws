@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright 2013 by Phillip Henslee (ph2@ph2.us).
+# Copyright 2013 by Phillip Henslee (phenslee@towerdigtial.us).
 # All rights reserved.
 
 # Permission is granted for use, copying, modification, distribution,
@@ -104,7 +104,19 @@ module KaseyaWS
                              hashing_algorithm: HASH_ALGORITHM}]}
                              )
       @sessionid = response.body[:authenticate_response][:authenticate_result][:session_id]
+    end
 
+    def close_alarm (monitor_alarm_id, notes)
+
+      client = Savon.client(@savon_options)
+
+      response = client.call(:close_alarm, message: {req:[{
+                                                            monitor_alarm_i_d: monitor_alarm_id,
+                                                            notes: notes,
+                                                            browser_ip: @client_ip,
+                             session_i_d: @sessionid}]}
+                             )
+      response.body[:close_alarm_response][:close_alarm_result]
     end
 
     def get_alarm (monitor_alarm_id)
