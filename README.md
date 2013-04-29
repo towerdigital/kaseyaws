@@ -2,7 +2,7 @@
 
 A simple Ruby Gem that provides a Ruby client for Kaseya's VSA web service.
 
-This is currently a work in progress, as all Kaseya web service operations are not implemented yet.
+This is currently a work in progress, as all Kaseya web service operations are not yet implemented.
 
 [The offical documentation for the Kaseya VSA web service](http://tinyurl.com/kaseyavsaws)
 
