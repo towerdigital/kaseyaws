@@ -46,6 +46,8 @@ module KaseyaWS
       response.body[:add_mach_group_to_scope_response][:add_mach_group_to_scope_result]
     end
 
+
+
     def add_org_to_scope(company_id,scope_id)
 
       response = self.client.call(:add_org_to_scope, message: {req:[{
@@ -163,14 +165,14 @@ module KaseyaWS
     def echo (input)
 
       response = self.client.call(:echo, message: { input: input })
-                                                                          
+
       response.body[:echo_response][:echo_result]
     end
 
     def echo_mt (payload)
 
       response = self.client.call(:echo_mt, message: {req:[{
-                                                               payload: payload,
+                                                             payload: payload,
                                   session_i_d: @sessionid}]}
                                   )
       response.body[:echo_mt_response][:echo_mt_result]
@@ -224,6 +226,33 @@ module KaseyaWS
                                   session_i_d: @sessionid}]}
                                   )
       response.body[:get_machine_list_response][:get_machine_list_result]
+    end
+
+    def get_notes_list(added_since)
+
+      response = self.client.call(:get_notes_list, message: {req:[{
+                                                                    added_since: get_notes_list,
+                                                                    browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
+      response.body[:get_notes_list_response][:get_notes_list_result]
+    end
+
+    def get_orgs
+
+      response = self.client.call(:get_orgs, message: {req:[{
+                                  session_i_d: @sessionid}]}
+                                  )
+      response.body[:get_orgs_response][:get_orgs_result]
+    end
+
+    def get_org_types
+
+      response = self.client.call(:get_org_types, message: {req:[{
+                                                                   browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
+      response.body[:get_org_types_response][:get_org_types_result]
     end
 
   end
