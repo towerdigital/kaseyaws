@@ -304,5 +304,23 @@ module KaseyaWS
       response.body[:get_published_views_response][:get_published_views_result]
     end
 
+    def get_roles
+
+      response = self.client.call(:get_roles, :message => {:req =>[{
+                                  :session_i_d => @sessionid}]}
+                                  )
+      response.body[:get_roles_response][:get_roles_result]
+    end
+
+    def get_scopes
+
+      response = self.client.call(:get_scopes, :message => {:req =>[{
+                                  :session_i_d => @sessionid}]}
+                                  )
+      response.body[:get_scopes_response][:get_scopes_result]
+    end
+
+    
+
   end
 end
