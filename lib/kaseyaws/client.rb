@@ -186,16 +186,6 @@ module KaseyaWS
       response.body[:get_alarm_response][:get_alarm_result]
     end
 
-    def get_alarm (monitor_alarm_id)
-
-      response = self.client.call(:get_alarm, message: {req:[{
-                                                               monitor_alarm_i_d: monitor_alarm_id,
-                                                               browser_i_p: @client_ip,
-                                  session_i_d: @sessionid}]}
-                                  )
-      response.body[:get_alarm_response][:get_alarm_result]
-    end
-
     def get_alarm_list (get_all_records=true)
 
       response = self.client.call(:get_alarm_list, message: {req:[{
