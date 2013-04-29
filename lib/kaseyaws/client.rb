@@ -320,7 +320,18 @@ module KaseyaWS
       response.body[:get_scopes_response][:get_scopes_result]
     end
 
+    def get_tic_request_ticket (id)
+
+      response = self.client.call(:get_tic_request_ticket, :message => {:req =>[{
+                                  :id => id,
+                                  :session_i_d => @sessionid}]}
+                                  )
+      response.body[:get_tic_request_ticket_response][:get_tic_request_ticket_result]
+    end
+
     
+
+
 
   end
 end
