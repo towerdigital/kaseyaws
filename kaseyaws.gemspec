@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version       = KaseyaWS::VERSION
   s.authors       = "Phillip Henslee"
   s.email         = "phenslee@towerdigital.us"
-  s.description   = "A Ruby Gem for Kaseya's VSA web services"
+  s.description   = "A Ruby Gem for Kaseya's VSA web service"
   s.summary       = "A simple client for the Kaseya VSA web service"
   s.homepage      = "https://github.com/towerdigital/kaseyaws"
   s.license       = "MIT"
