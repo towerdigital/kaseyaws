@@ -2,23 +2,23 @@
 
 A simple Ruby Gem that provides a Ruby client for Kaseya's VSA web service.
 
-[The offical documentation for the Kaseya VSA web service](http://tinyurl.com/kaseyavsaws)
-
 This is currently a work in progress, as all Kaseya web service operations are not implemented yet.
+
+[The offical documentation for the Kaseya VSA web service](http://tinyurl.com/kaseyavsaws)
 
 ## Installation
 
-Add this line to your application's Gemfile:
+KaseyaWS is available at [Rubygems](http://rubygems.org/gems/kaseyaws) and can be installed as follows.
 
-    gem 'kaseyaws'
+```
+$ gem install kaseyaws
+```
 
-And then execute:
+or add it to your Gemfile:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install kaseyaws
+```
+gem 'kaseyaws', '~> 0.0.3'
+```
 
 ## Usage
 
