@@ -14,6 +14,8 @@ require "savon"
 
 module KaseyaWS
 
+  # The client class is just a wrapper for the Kaseya VSA WSDL. All methods return a Hash object
+
   class Client
     HASH_ALGORITHM = "SHA-256"
     attr_accessor :client
@@ -36,31 +38,31 @@ module KaseyaWS
     def add_mach_group_to_scope(group_name,scope_name)
 
       response = self.client.call(:add_mach_group_to_scope, message: {req:[{
-                                                                        group_name: group_name,
-                                                                        scope_name: scope_name,
-                                                                        browser_ip: @client_ip,
-                             session_i_d: @sessionid}]}
-                             )
+                                                                             group_name: group_name,
+                                                                             scope_name: scope_name,
+                                                                             browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:add_mach_group_to_scope_response][:add_mach_group_to_scope_result]
     end
 
     def add_org_to_scope(company_id,scope_id)
 
       response = self.client.call(:add_org_to_scope, message: {req:[{
-                                                                 company_i_d: company_id,
-                                                                 scope_i_d: scope_id,
-                             session_i_d: @sessionid}]}
-                             )
+                                                                      company_i_d: company_id,
+                                                                      scope_i_d: scope_id,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:add_org_to_scope_response][:add_org_to_scope_result]
     end
 
     def add_user_to_role(username,role_id)
 
       response = self.client.call(:add_user_to_role, message: {req:[{
-                                                                 user_name: user_name,
-                                                                 role_i_d: role_id,
-                             session_i_d: @sessionid}]}
-                             )
+                                                                      user_name: user_name,
+                                                                      role_i_d: role_id,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:add_user_to_role_response][:add_user_to_role_result]
     end
 
@@ -68,7 +70,6 @@ module KaseyaWS
 
       random_number = KaseyaWS::Security.secure_random
       covered_password = KaseyaWS::Security.compute_covered_password(username,password, random_number, HASH_ALGORITHM)
-      browser_ip = @client_ip
 
       self.client = Savon::Client.new(@savon_options)
 
@@ -76,7 +77,7 @@ module KaseyaWS
                                                                   user_name: username,
                                                                   covered_password: covered_password,
                                                                   random_number: random_number,
-                                                                  browser_ip: browser_ip,
+                                                                  browser_i_p: @client_ip,
                                   hashing_algorithm: HASH_ALGORITHM}]}
                                   )
       @sessionid = response.body[:authenticate_response][:authenticate_result][:session_id]
@@ -85,53 +86,111 @@ module KaseyaWS
     def close_alarm (monitor_alarm_id, notes)
 
       response = self.client.call(:close_alarm, message: {req:[{
-                                                            monitor_alarm_i_d: monitor_alarm_id,
-                                                            notes: notes,
-                                                            browser_ip: @client_ip,
-                             session_i_d: @sessionid}]}
-                             )
+                                                                 monitor_alarm_i_d: monitor_alarm_id,
+                                                                 notes: notes,
+                                                                 browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:close_alarm_response][:close_alarm_result]
     end
 
     def create_machine_group (group_name,org_name,parent_name)
 
       response = self.client.call(:create_machine_group, message: {req:[{
-                                                            group_name: group_name,
-                                                            org_name: org_name,
-                                                            parent_name: parent_name,
-                                                            browser_ip: @client_ip,
-                             session_i_d: @sessionid}]}
-                             )
+                                                                          group_name: group_name,
+                                                                          org_name: org_name,
+                                                                          parent_name: parent_name,
+                                                                          browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:create_machine_group_response][:create_machine_group_result]
     end
 
     def create_role (role_name,role_type,parent_role_name)
 
       response = self.client.call(:create_role, message: {req:[{
-                                                            role_name: role_name,
-                                                            role_type: role_type,
-                                                            parent_role_name: parent_role_name,
-                                                            browser_ip: @client_ip,
-                             session_i_d: @sessionid}]}
-                             )
+                                                                 role_name: role_name,
+                                                                 role_type: role_type,
+                                                                 parent_role_name: parent_role_name,
+                                                                 browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:create_role_response][:create_role_result]
     end
 
     def delete_admin (user_name)
 
       response = self.client.call(:delete_admin, message: {req:[{
-                                                            user_name: user_name,
-                                                            browser_ip: @client_ip,
-                             session_i_d: @sessionid}]}
-                             )
+                                                                  user_name: user_name,
+                                                                  browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:delete_admin_response][:delete_admin_result]
+    end
+
+
+    def delete_agent (agent_guid, uninstall_agent_first)
+
+      response = self.client.call(:delete_agent, message: {req:[{
+                                                                  agent_guid: agent_guid,
+                                                                  uninstall_agent_first: uninstall_agent_first,
+                                                                  browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
+      response.body[:delete_agent_response][:delete_agent_result]
+    end
+
+    def delete_agent_install_package (package_id)
+
+      response = self.client.call(:delete_agent_install_package, message: {req:[{
+                                                                                  package_id: package_id,
+                                                                                  browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
+      response.body[:delete_agent_install_package_response][:delete_agent_install_package_result]
+    end
+
+    def delete_machine_group (group_name)
+
+      response = self.client.call(:delete_machine_group, message: {req:[{
+                                                                          group_name: group_name,
+                                                                          browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
+      response.body[:delete_machine_group_response][:delete_machine_group_result]
+    end
+
+    def echo (input)
+
+      response = self.client.call(:echo, message: { input: input })
+                                                                          
+      response.body[:echo_response][:echo_result]
+    end
+
+    def echo_mt (payload)
+
+      response = self.client.call(:echo_mt, message: {req:[{
+                                                               payload: payload,
+                                  session_i_d: @sessionid}]}
+                                  )
+      response.body[:echo_mt_response][:echo_mt_result]
     end
 
     def get_alarm (monitor_alarm_id)
 
       response = self.client.call(:get_alarm, message: {req:[{
                                                                monitor_alarm_i_d: monitor_alarm_id,
-                                                               browser_ip: @client_ip,
+                                                               browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
+      response.body[:get_alarm_response][:get_alarm_result]
+    end
+
+    def get_alarm (monitor_alarm_id)
+
+      response = self.client.call(:get_alarm, message: {req:[{
+                                                               monitor_alarm_i_d: monitor_alarm_id,
+                                                               browser_i_p: @client_ip,
                                   session_i_d: @sessionid}]}
                                   )
       response.body[:get_alarm_response][:get_alarm_result]
@@ -141,7 +200,7 @@ module KaseyaWS
 
       response = self.client.call(:get_alarm_list, message: {req:[{
                                                                     return_all_records: get_all_records,
-                                                                    browser_ip: @client_ip,
+                                                                    browser_i_p: @client_ip,
                                   session_i_d: @sessionid}]}
                                   )
       response.body[:get_alarm_list_response][:get_alarm_list_result]
@@ -150,30 +209,30 @@ module KaseyaWS
     def get_machine(machine_group_id)
 
       response = self.client.call(:get_machine, message: {req:[{
-                                                            machine___group_i_d: machine_group_id,
-                                                            browser_ip: @client_ip,
-                             session_i_d: @sessionid}]}
-                             )
+                                                                 machine___group_i_d: machine_group_id,
+                                                                 browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:get_machine_response][:get_machine_result]
     end
 
     def get_machine_group_list
 
       response = self.client.call(:get_machine_group_list, message: {req:[{
-                                                                       browser_ip: @client_ip,
-                             session_i_d: @sessionid}]}
-                             )
+                                                                            browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:get_machine_group_list_response][:get_machine_group_list_result]
     end
 
     def get_machine_list(machine_group,machine_collection)
 
       response = self.client.call(:get_machine_list, message: {req:[{
-                                                                 machine_group: machine_group,
-                                                                 machine_collection: machine_collection,
-                                                                 browser_ip: @client_ip,
-                             session_i_d: @sessionid}]}
-                             )
+                                                                      machine_group: machine_group,
+                                                                      machine_collection: machine_collection,
+                                                                      browser_i_p: @client_ip,
+                                  session_i_d: @sessionid}]}
+                                  )
       response.body[:get_machine_list_response][:get_machine_list_result]
     end
 
