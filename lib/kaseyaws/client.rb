@@ -323,13 +323,33 @@ module KaseyaWS
     def get_tic_request_ticket (id)
 
       response = self.client.call(:get_tic_request_ticket, :message => {:req =>[{
-                                  :id => id,
+                                                                                  :id => id,
+                                                                                  :browser_i_p => @client_ip,
                                   :session_i_d => @sessionid}]}
                                   )
       response.body[:get_tic_request_ticket_response][:get_tic_request_ticket_result]
     end
 
-    
+    def get_ticket (ticket_id)
+
+      response = self.client.call(:get_ticket, :message => {:req =>[{
+                                                                      :ticket_i_d => ticket_id,
+                                                                      :browser_i_p => @client_ip,
+                                  :session_i_d => @sessionid}]}
+                                  )
+      response.body[:get_ticket_response][:get_ticket_result]
+    end
+
+    def get_ticket_list (return_all_records=true)
+
+      response = self.client.call(:get_ticket_list, :message => {:req =>[{
+                                                                      :return_all_records => return_all_records,
+                                                                      :browser_i_p => @client_ip,
+                                  :session_i_d => @sessionid}]}
+                                  )
+      response.body[:get_ticket_list_response][:get_ticket_list_result]
+    end
+
 
 
 
