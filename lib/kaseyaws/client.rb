@@ -29,7 +29,7 @@ module KaseyaWS
         convert_request_keys_to: :camelcase,
         env_namespace: :soap,
         open_timeout: 30,
-        log: false
+        log: true
       }
       @sessionid = self.authenticate(username,password)
 
@@ -259,7 +259,6 @@ module KaseyaWS
 
       response = self.client.call(:get_orgs_by_scope_id, :message => {:req =>[{
                                                                                 :scope_i_d => scope_id,
-                                                                                :browser_i_p => @client_ip,
                                   :session_i_d => @sessionid}]}
                                   )
       response.body[:get_orgs_by_scope_id_response][:get_orgs_by_scope_id_result]
@@ -343,15 +342,21 @@ module KaseyaWS
     def get_ticket_list (return_all_records=true)
 
       response = self.client.call(:get_ticket_list, :message => {:req =>[{
-                                                                      :return_all_records => return_all_records,
-                                                                      :browser_i_p => @client_ip,
+                                                                           :return_all_records => return_all_records,
+                                                                           :browser_i_p => @client_ip,
                                   :session_i_d => @sessionid}]}
                                   )
       response.body[:get_ticket_list_response][:get_ticket_list_result]
     end
 
+    def get_ticket_notes (ticket_id)
 
-
-
+      response = self.client.call(:get_ticket_notes, :message => {:req =>[{
+                                                                            :ticket_i_d => ticket_id,
+                                                                            :browser_i_p => @client_ip,
+                                  :session_i_d => @sessionid}]}
+                                  )
+      response.body[:get_ticket_notes_response][:get_ticket_notes_result]
+    end
   end
 end
