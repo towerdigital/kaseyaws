@@ -42,7 +42,11 @@ alarm[:alarm_subject]
 
 KaseyaWS has two Gem dependencies, Savon and json.
 
-[Savon](http://savonrb.com/) the Heavy metal SOAP client.
+[Savon](http://savonrb.com/) 
+
+The Heavy metal SOAP client Savon does most of the work.
 
 [json](http://flori.github.com/json)
+
+A Ruby implementation for JSON.
 
