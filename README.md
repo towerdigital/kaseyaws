@@ -46,7 +46,7 @@ KaseyaWS has two Gem dependencies, Savon and json.
 
 The Heavy metal SOAP client Savon does most of the work.
 
-[json](http://flori.github.com/json)
+[JSON](http://flori.github.com/json)
 
 A Ruby implementation for JSON.
 
