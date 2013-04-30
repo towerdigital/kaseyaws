@@ -29,7 +29,7 @@ module KaseyaWS
         convert_request_keys_to: :camelcase,
         env_namespace: :soap,
         open_timeout: 30,
-        log: true
+        log: false
       }
       @sessionid = self.authenticate(username,password)
 
@@ -257,7 +257,7 @@ module KaseyaWS
 
     def get_orgs_by_scope_id (scope_id)
 
-      response = self.client.call(:get_orgs_by_scope_id, :message => {:req =>[{
+      response = self.client.call(:get_orgs_by_scope_id, :message => {"req" =>[{
                                                                                 :scope_i_d => scope_id,
                                   :session_i_d => @sessionid}]}
                                   )
