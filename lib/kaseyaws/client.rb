@@ -258,7 +258,7 @@ module KaseyaWS
     def get_orgs_by_scope_id (scope_id)
 
       response = self.client.call(:get_orgs_by_scope_id, :message => {"req" =>[{
-                                                                                :scope_i_d => scope_id,
+                                                                                 :scope_i_d => scope_id,
                                   :session_i_d => @sessionid}]}
                                   )
       response.body[:get_orgs_by_scope_id_response][:get_orgs_by_scope_id_result]
@@ -358,5 +358,6 @@ module KaseyaWS
                                   )
       response.body[:get_ticket_notes_response][:get_ticket_notes_result]
     end
+
   end
 end
