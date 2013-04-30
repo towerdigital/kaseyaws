@@ -38,4 +38,11 @@ alarm[:alarm_subject]
 # => "Monitoring generated Counter ALARM at 5:47:54 am 01-Feb-13 on computer.systems.company"
 
 ```
+## Dependencies
+
+KaseyaWS has two Gem dependencies, Savon and json.
+
+[Savon](http://savonrb.com/) the Heavy metal SOAP client.
+
+[json](http://flori.github.com/json)
 
