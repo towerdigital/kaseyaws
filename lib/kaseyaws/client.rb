@@ -25,11 +25,11 @@ module KaseyaWS
       @vsa_serviceurl = "https://" + hostname + "/vsaWS/kaseyaWS.asmx?WSDL"
       @client_ip = KaseyaWS::Security.client_ip
       @savon_options={
-        wsdl: @vsa_serviceurl,
-        convert_request_keys_to: :camelcase,
-        env_namespace: :soap,
-        open_timeout: 30,
-        log: false
+        :wsdl => @vsa_serviceurl,
+        :convert_request_keys_to => :camelcase,
+        :env_namespace => :soap,
+        :open_timeout => 30,
+        :log => false
       }
       @sessionid = self.authenticate(username,password)
 
