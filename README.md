@@ -17,7 +17,7 @@ $ gem install kaseyaws
 or add it to your Gemfile:
 
 ```
-gem 'kaseyaws', '~> 0.0.5'
+gem 'kaseyaws', '~> 0.0.6'
 ```
 
 ## Usage
